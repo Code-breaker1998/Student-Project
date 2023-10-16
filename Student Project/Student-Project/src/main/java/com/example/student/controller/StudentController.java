@@ -1,0 +1,26 @@
+package com.example.student.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.student.entity.Student;
+import com.example.student.service.StudentServiceImpl;
+
+@Controller
+@RequestMapping("/student")
+public class StudentController {
+	
+	@Autowired
+	StudentServiceImpl studentservice;
+
+	@PostMapping("/add")
+	public ResponseEntity<Student> addStudent(@RequestBody Student stu) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(studentservice.saveStudent(stu));
+	}
+	
+}
